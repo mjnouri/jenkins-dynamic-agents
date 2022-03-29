@@ -1,11 +1,12 @@
-rather than putting my public IP in the SG, use tf apply -var "my_ip=1.2.3.4/32"
+use tf apply -var "my_ip=1.2.3.4/32" -> try again to make this work
 add instance ID to IAM stuff?
 remove inline sg rules and make them their own ingress resources 
 add var.my_ip input validation where it has to be x.x.x.x/32
-
+make these items as issues
+move following directions into readme and format
 
 ------------------
-ec2perm
+create permanent ec2 build agents
 
     on master
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
@@ -23,10 +24,14 @@ cat id_rsa.pub > ~/.ssh/authorized_keys
 cat .ssh/id_rsa
 copy that whole file's contents
 
-on jenkins master, create credentials for each slave
+on jenkins master, create ssh key pairs for each slave
 then add slaves1 and 2 as nodes
 ------------------
-ec2dyn
+create dynamic ec2 build agents
 
 install ec2 plugin
 
+------------------
+create dynamic eks build agents
+
+(didn't start this yet)
