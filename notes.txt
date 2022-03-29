@@ -1,0 +1,32 @@
+rather than putting my public IP in the SG, use tf apply -var "my_ip=1.2.3.4/32"
+add instance ID to IAM stuff?
+remove inline sg rules and make them their own ingress resources 
+add var.my_ip input validation where it has to be x.x.x.x/32
+
+
+------------------
+ec2perm
+
+    on master
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+open jenkins master homepage on browser and perform initial setup
+remove executors
+
+    on slaves
+sudo apt-get update
+sudo apt install default-jdk
+sudo adduser jenkins --shell /bin/bash
+su jenkins
+cd
+ssh-keygen
+cat id_rsa.pub > ~/.ssh/authorized_keys
+cat .ssh/id_rsa
+copy that whole file's contents
+
+on jenkins master, create credentials for each slave
+then add slaves1 and 2 as nodes
+------------------
+ec2dyn
+
+install ec2 plugin
+
