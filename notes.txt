@@ -1,11 +1,3 @@
-use tf apply -var "my_ip=1.2.3.4/32" -> try again to make this work
-add instance ID to IAM stuff?
-remove inline sg rules and make them their own ingress resources 
-add var.my_ip input validation where it has to be x.x.x.x/32
-make these items as issues
-move following directions into readme and format
-
-------------------
 create permanent ec2 build agents
 
     on master

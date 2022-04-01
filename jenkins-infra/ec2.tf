@@ -17,37 +17,40 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "jenkins-master" {
   ami                    = data.aws_ami.ubuntu.id
   iam_instance_profile   = aws_iam_instance_profile.jenkins-master-instance-profile.name
-  instance_type          = "t3.medium"
+  instance_type          = var.instance_type
   subnet_id              = aws_subnet.jenkins_public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_8080.id, aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_8080_vpc.id]
-  key_name               = "mark-test"
-  user_data              = file("./jenkins-infra/install-jenkins.sh")
+  key_name               = var.key_name
+  user_data              = file("../jenkins-infra/install-jenkins.sh")
   tags = {
     "Name"         = "jenkins-master"
     "Linux Distro" = "Ubuntu"
+    "Environment"  = var.env
   }
 }
 
 resource "aws_instance" "jenkins-slave1" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t3.medium"
+  instance_type          = var.instance_type
   subnet_id              = aws_subnet.jenkins_public_subnet_2.id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_22_vpc.id]
   key_name               = "mark-test"
   tags = {
     "Name"         = "jenkins-slave1"
     "Linux Distro" = "Ubuntu"
+    "Environment"  = var.env
   }
 }
 
 resource "aws_instance" "jenkins-slave2" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t3.medium"
+  instance_type          = var.instance_type
   subnet_id              = aws_subnet.jenkins_public_subnet_3.id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_22_vpc.id]
   key_name               = "mark-test"
   tags = {
     "Name"         = "jenkins-slave2"
     "Linux Distro" = "Ubuntu"
+    "Environment"  = var.env
   }
 }
