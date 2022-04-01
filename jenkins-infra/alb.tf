@@ -14,7 +14,7 @@
 # 
 # resource "aws_lb_target_group_attachment" "jenkins_tg_attach" {
 #   target_group_arn = aws_lb_target_group.jenkins_tg.arn
-#   target_id        = aws_instance.jenkins-master.id
+#   target_id        = aws_instance.jenkins-controller.id
 #   port             = 8080
 # }
 # 

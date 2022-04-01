@@ -29,4 +29,3 @@ override.tf.json
 # example: *tfplan*
 
 variables.tf
-jenkins-infra-module/variables.tf
