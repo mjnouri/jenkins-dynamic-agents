@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "devils-bucket"
-    key    = "tf-state/jenkins-dynamic-agents/terraform.tfstate"
+    key    = "tf-state/jenkins-dynamic-agents/prod/terraform.tfstate"
     region = "us-east-1"
   }
   required_providers {

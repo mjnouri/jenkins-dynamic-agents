@@ -18,7 +18,7 @@ resource "aws_instance" "jenkins-controller" {
   ami                    = data.aws_ami.ubuntu.id
   iam_instance_profile   = aws_iam_instance_profile.jenkins-controller-instance-profile.name
   instance_type          = var.instance_type
-  subnet_id              = aws_subnet.jenkins_public_subnet_1.id
+  subnet_id              = aws_subnet.jenkins_public_subnet[0].id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_8080.id, aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_8080_vpc.id]
   key_name               = var.key_name
   user_data              = file("../jenkins-infra/install-jenkins.sh")
@@ -33,11 +33,11 @@ resource "aws_instance" "jenkins-agent" {
   count                  = (var.env == "Production") ? 2 : 1
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
-  subnet_id              = aws_subnet.jenkins_public_subnet_2.id
+  subnet_id              = aws_subnet.jenkins_public_subnet[count.index+1].id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_22_vpc.id]
   key_name               = "mark-test"
   tags = {
-    Name         = "jenkins-agent${count.index}"
+    Name         = "jenkins-agent${count.index+1}"
     Linux_Distro = "Ubuntu"
     Environment  = var.env
   }
