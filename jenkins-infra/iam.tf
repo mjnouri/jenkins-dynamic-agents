@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "jenkins-controller-policy" {
-  name        = "jenkins-controller-policy"
+  name        = "${var.project_name}-${var.env}-controller-policy"
   path        = "/"
-  description = "Jenkins Controller Policy"
+  description = "${title(var.project_name)} ${title(var.env)} Controller Policy"
 
   policy = jsonencode({
     "Version" : "2012-10-17",
@@ -39,7 +39,7 @@ resource "aws_iam_policy" "jenkins-controller-policy" {
 }
 
 resource "aws_iam_role" "jenkins-controller-role" {
-  name = "jenkins-controller-role"
+  name = "${var.project_name}-${var.env}-controller-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -56,17 +56,17 @@ resource "aws_iam_role" "jenkins-controller-role" {
   })
 
   tags = {
-    tag-key = "jenkins-controller-role"
+    tag-key = "${var.project_name}-${var.env}-controller-role"
   }
 }
 
 resource "aws_iam_policy_attachment" "jenkins-controller-policy-attach" {
-  name       = "jenkins-controller-policy-attach"
+  name       = "${var.project_name}-${var.env}-controller-policy-attach"
   roles      = [aws_iam_role.jenkins-controller-role.name]
   policy_arn = aws_iam_policy.jenkins-controller-policy.arn
 }
 
 resource "aws_iam_instance_profile" "jenkins-controller-instance-profile" {
-  name = "jenkins-controller-instance-profile"
+  name = "${var.project_name}-${var.env}-controller-instance-profile"
   role = aws_iam_role.jenkins-controller-role.name
 }

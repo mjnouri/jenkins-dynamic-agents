@@ -23,21 +23,21 @@ resource "aws_instance" "jenkins-controller" {
   key_name               = var.key_name
   user_data              = file("../jenkins-infra/install-jenkins.sh")
   tags = {
-    Name         = "jenkins-controller"
+    Name         = "${var.project_name}-${var.env}-controller"
     Linux_Distro = "Ubuntu"
     Environment  = var.env
   }
 }
 
 resource "aws_instance" "jenkins-agent" {
-  count                  = (var.env == "Production") ? 2 : 1
+  count                  = (var.env == "prod") ? 2 : 1
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.jenkins_public_subnet[count.index+1].id
   vpc_security_group_ids = [aws_security_group.jenkins_sg_22.id, aws_security_group.jenkins_sg_22_vpc.id]
   key_name               = "mark-test"
   tags = {
-    Name         = "jenkins-agent${count.index+1}"
+    Name         = "${var.project_name}-${var.env}-agent-${count.index+1}"
     Linux_Distro = "Ubuntu"
     Environment  = var.env
   }

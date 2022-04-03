@@ -1,5 +1,5 @@
 resource "aws_security_group" "jenkins_sg_8080" {
-  name = "jenkins_sg_8080"
+  name = "${var.project_name}-${var.env}-sg-8080-me"
 
   vpc_id = aws_vpc.jenkins_vpc.id
 
@@ -20,7 +20,7 @@ resource "aws_security_group" "jenkins_sg_8080" {
 }
 
 resource "aws_security_group" "jenkins_sg_22" {
-  name = "jenkins_sg_22"
+  name = "${var.project_name}-${var.env}-sg-22-me"
 
   vpc_id = aws_vpc.jenkins_vpc.id
 
@@ -41,7 +41,7 @@ resource "aws_security_group" "jenkins_sg_22" {
 }
 
 resource "aws_security_group" "jenkins_sg_8080_vpc" {
-  name = "jenkins_sg_8080_vpc"
+  name = "${var.project_name}-${var.env}-sg-8080-vpc"
 
   vpc_id = aws_vpc.jenkins_vpc.id
 
@@ -62,7 +62,7 @@ resource "aws_security_group" "jenkins_sg_8080_vpc" {
 }
 
 resource "aws_security_group" "jenkins_sg_22_vpc" {
-  name = "jenkins_sg_22_vpc"
+  name = "${var.project_name}-${var.env}-sg-22-vpc"
 
   vpc_id = aws_vpc.jenkins_vpc.id
 
@@ -83,7 +83,7 @@ resource "aws_security_group" "jenkins_sg_22_vpc" {
 }
 
 resource "aws_security_group" "jenkins_sg_80" {
-  name = "jenkins_sg_80"
+  name = "${var.project_name}-${var.env}-sg-80-me"
 
   vpc_id = aws_vpc.jenkins_vpc.id
 

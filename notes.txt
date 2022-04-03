@@ -27,3 +27,6 @@ install ec2 plugin
 create dynamic eks build agents
 
 (didn't start this yet)
+
+------------------
+terraform graph | dot -Tsvg > graph.svg

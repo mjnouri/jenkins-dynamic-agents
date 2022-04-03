@@ -1,3 +1,7 @@
+variable "project_name" {
+  default = "jenkins"
+}
+
 variable "my_ip" {
   default = ""
 }
